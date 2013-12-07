@@ -6,7 +6,7 @@
 # catalog-version undef
 Name:		texlive-cookingsymbols
 Version:	20111110
-Release:	4
+Release:	5
 Summary:	TeXLive cookingsymbols package
 Group:		Publishing
 URL:		http://tug.org/texlive
