@@ -1,6 +1,6 @@
 Name:		texlive-cookingsymbols
 Version:	35929
-Release:	1
+Release:	2
 Summary:	TeXLive cookingsymbols package
 Group:		Publishing
 URL:		http://tug.org/texlive
