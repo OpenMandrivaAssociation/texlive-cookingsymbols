@@ -1,49 +1,25 @@
-Name:		texlive-cookingsymbols
-Version:	74247
-Release:	1
-Summary:	TeXLive cookingsymbols package
-Group:		Publishing
-URL:		https://tug.org/texlive
-License:	http://www.tug.org/texlive/LICENSE.TL
-Source0:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/cookingsymbols.r%{version}.tar.xz
-Source1:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/cookingsymbols.doc.r%{version}.tar.xz
-Source2:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/cookingsymbols.source.r%{version}.tar.xz
-BuildArch:	noarch
-BuildRequires:	texlive-tlpkg
-Requires(pre):	texlive-tlpkg
-Requires(post):	texlive-kpathsea
+%global tl_name cookingsymbols
+%global tl_revision 79618
 
-%define		_unpackaged_subdirs_terminate_build	0
+Name:		texlive-%{tl_name}
+Epoch:		1
+Version:	1.1
+Release:	%{tl_revision}.1
+Summary:	Symbols for recipes
+Group:		Publishing
+URL:		https://www.ctan.org/tex-archive/macros/latex/contrib/cookingsymbols
+License:	lppl1.3
+Source0:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/cookingsymbols.r%{tl_revision}.tar.xz
+Source1:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/cookingsymbols.doc.r%{tl_revision}.tar.xz
+Source2:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/cookingsymbols.source.r%{tl_revision}.tar.xz
+BuildArch:	noarch
+BuildSystem:	texlive
+BuildRequires:	texlive-tlpkg
+%texlive_base_requires
+Provides:	texlive(%{tl_name}) = %{tl_revision}
 
 %description
-TeXLive cookingsymbols package.
+The package provides 11 symbols for typesetting recipes: oven, gasstove,
+topheat, fanoven, gloves and dish symbol (among others). The symbols are
+defined using Metafont.
 
-%post
-%{_sbindir}/texlive.post
-
-%postun
-if [ $1 -eq 0 ]; then
-	%{_sbindir}/texlive.post
-fi
-
-#-----------------------------------------------------------------------
-%files
-%{_texmfdistdir}/fonts/source/public/cookingsymbols/cookingsymbols.mf
-%{_texmfdistdir}/fonts/tfm/public/cookingsymbols/cookingsymbols.tfm
-%{_texmfdistdir}/tex/latex/cookingsymbols/cookingsymbols.sty
-%doc %{_texmfdistdir}/doc/latex/cookingsymbols/README
-%doc %{_texmfdistdir}/doc/latex/cookingsymbols/cookingsymbols.pdf
-#- source
-%doc %{_texmfdistdir}/source/latex/cookingsymbols/cookingsymbols.dtx
-%doc %{_texmfdistdir}/source/latex/cookingsymbols/cookingsymbols.ins
-
-#-----------------------------------------------------------------------
-%prep
-%setup -c -a1 -a2
-%autopatch -p1
-
-%build
-
-%install
-mkdir -p %{buildroot}%{_texmfdistdir}
-cp -fpar fonts tex doc source %{buildroot}%{_texmfdistdir}
